@@ -54,3 +54,17 @@
   height: $d;
   border-radius: 50%;
 }
+
+@mixin border-1px($color) {
+  position: relative;
+  // 添加伪类
+  &:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0PX;
+    width: 100%;
+    border-top: 1PX solid $color;
+    content: '';
+  }
+}
