@@ -1,5 +1,7 @@
 <template>
+<scroll>
   <div>recommend</div>
+</scroll>
 </template>
 
 <script>
