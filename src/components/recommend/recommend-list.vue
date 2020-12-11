@@ -2,11 +2,7 @@
   <div class="recommend">
     <h2 class="title">推荐歌单</h2>
     <ul class="list-wrapper">
-      <li
-        v-for="(item, index) in recommendPlaylist"
-        :key="index"
-        class="item-wrapper"
-      >
+      <li v-for="(item, index) in data" :key="index" class="item-wrapper">
         <div class="item" @click="selectList(item)">
           <div class="mask">
             <span class="mask-text">{{ item.playCount | formatNumber }}</span>
@@ -22,17 +18,16 @@
 </template>
 
 <script>
-import { getPlaylist } from '@/api/playlist'
 export default {
+  props: {
+    data: {
+      type: Array,
+    },
+  },
   data() {
-    return {
-      recommendPlaylist: [],
-    }
+    return {}
   },
-  async created() {
-    const { result } = await getPlaylist()
-    this.recommendPlaylist = result
-  },
+
   methods: {
     selectList() {
       console.log('select')
@@ -88,7 +83,7 @@ export default {
       }
       .name-wrapper {
         font-size: $font-size-small-x;
-        @include text-ellipsis-multi(2)
+        @include text-ellipsis-multi(2);
       }
     }
   }

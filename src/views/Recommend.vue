@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <scroll ref="scroll" class="scroll-wrapper">
+  <div class="scroll-wrapper">
+    <scroll ref="scroll" class="scroll" :data="recommendPlaylist">
       <div>
         <banner></banner>
-        <recommend-list></recommend-list>
+        <recommend-list :data="recommendPlaylist"></recommend-list>
       </div>
     </scroll>
   </div>
@@ -12,21 +12,33 @@
 <script>
 import banner from '../components/recommend/banner.vue'
 import RecommendList from '../components/recommend/recommend-list.vue'
+import { getPlaylist } from '@/api/playlist'
+
 export default {
   components: { banner, RecommendList },
   data() {
-    return {}
+    return {
+      recommendPlaylist: []
+    }
   },
-  created() {},
+  async created() {
+    const { result } = await getPlaylist()
+    this.recommendPlaylist = result
+  },
   mounted() {},
   methods: {},
 }
 </script>
 <style lang='scss' scoped>
 .scroll-wrapper {
-  position: absolute;
+  position: fixed;
   top: 82px;
   bottom: 0;
   width: 100%;
+  .scroll {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
 }
 </style>
