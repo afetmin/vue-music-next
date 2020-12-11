@@ -9,7 +9,7 @@ import { EMPTY_IMG } from "./dom"
 export default {
   install(Vue) {
     const requireComponent = require.context(
-      "@/components/common",
+      "@/base",
       true,
       /[a-z0-9]+\.(jsx?|vue)$/i,
     )
