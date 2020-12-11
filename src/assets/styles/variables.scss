@@ -1,41 +1,28 @@
-$theme-color: #d33a31;
-$black: #000;
-$white: #fff;
-$gold: #e7aa5a;
-$blue: #517eaf;
+// 颜色定义规范
+$color-background: #F2F3F4;
+$color-background-dark: rgba(0, 0, 0, 0.3);
+$color-highlight-background: rgb(253, 108, 98);
+$color-dialog-background: rgb(204, 204, 204);
+$color-theme: rgb(212, 68, 57);
+$color-theme-l: rgb(241, 241, 241);
+$color-theme-g: rgb(219, 219, 219);
+$color-theme-d: rgba(19, 19, 19, 0.6);
+$color-sub-theme: rgb(240, 116, 107);
+$color-text: #2E3030;
+$color-text-g: #757575;
+$color-text-ggg: #c7c7c7;
+$color-text-gg: rgb(219, 219, 219);
+$color-text-l: rgb(241, 241, 241);
+$color-text-lm: rgb(228, 228, 228);
+$color-text-ll: rgba(255, 255, 255, 0.8);
 
-$font-size: 14px;
-$font-size-medium-sm: 13px;
-$font-size-lg: 16px;
-$font-size-sm: 12px;
-$font-size-xs: 10px;
-$font-size-medium: 15px;
-$font-size-title: 18px;
-$font-size-title-lg: 24px;
-
-$font-weight-bold: 700;
-
-$font-color-transparent: rgba(255, 255, 255, 0.5);
-
-$border: 1px solid #3f3f3f;
-
-$page-padding: 16px 32px;
-// layout
-$layout-content-min-width: 700px;
-// content
-$center-content-max-width: 1000px;
-// header
-$header-height: 50px;
-
-// mini-player
-$mini-player-height: 60px;
-$mini-player-z-index: 1002;
-
-//playlist
-$playlist-z-index: 1001;
-
-//search
-$search-panel-z-index: 1001;
-
-//song-detail
-$song-detail-z-index: 1000;
+//字体定义规范
+$font-size-small-ss: 9px;
+$font-size-small-s: 10px;
+$font-size-small: 11px;
+$font-size-small-x: 12px;
+$font-size-medium: 14px;
+$font-size-medium-x: 16px;
+$font-size-large-s: 17px;
+$font-size-large: 18px;
+$font-size-large-x: 22px;

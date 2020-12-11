@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
-  </div>
+<div>rank</div>
 </template>
 
 <script>
-
 export default {
 
 }
 </script>
+<style lang='scss' scoped>
+</style>
