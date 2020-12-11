@@ -1,3 +1,4 @@
+// 歌单
 import request from '@/utils/request'
 
 export function getPlaylist(limit = 30) {

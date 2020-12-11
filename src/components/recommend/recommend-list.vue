@@ -5,6 +5,7 @@
       <li v-for="(item, index) in data" :key="index" class="item-wrapper">
         <div class="item" @click="selectList(item)">
           <div class="mask">
+            <i class="iconfont icon-headphone"></i>
             <span class="mask-text">{{ item.playCount | formatNumber }}</span>
           </div>
           <img v-lazy="item.picUrl" />
@@ -66,14 +67,16 @@ export default {
           border-radius: 4px;
           text-align: right;
           box-sizing: border-box;
-          padding-right: 5px;
+          padding: 2px 4px;
+          font-size: $font-size-small-s;
+          color: $color-text-l;
           background: linear-gradient(
-            rgba(109, 109, 109, 0.4),
-            rgba(255, 255, 255, 0)
+            rgba(109, 109, 109, 0.5),
+            rgba(255, 255, 255, 0.02)
           );
           .mask-text {
-            font-size: $font-size-small-s;
-            color: $color-text-l;
+            display: inline-block;
+            margin-left: 2px;
           }
         }
         img {

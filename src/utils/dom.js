@@ -6,7 +6,7 @@ export function addClass(el, className) {
 	el.classList.add(className)
 }
 
-export function getData(el, name, val) {
+export function getDataAttr(el, name, val) {
 	const prefix = 'data-'
 	if (val) {
 		return el.setAttribute(prefix + name, val)

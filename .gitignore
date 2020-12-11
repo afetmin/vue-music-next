@@ -2,7 +2,8 @@
 node_modules
 /dist
 NeteaseCloudMusicApi
-
+download
+download.zip
 
 # local env files
 .env.local

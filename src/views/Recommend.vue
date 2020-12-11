@@ -25,8 +25,6 @@ export default {
     const { result } = await getPlaylist()
     this.recommendPlaylist = result
   },
-  mounted() {},
-  methods: {},
 }
 </script>
 <style lang='scss' scoped>
