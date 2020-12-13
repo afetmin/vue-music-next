@@ -54,6 +54,7 @@
 <script>
 import { getDataAttr } from '@/utils/dom'
 
+const TITLE_HEIGHT = 20
 export default {
   props: {
     data: {
@@ -86,11 +87,11 @@ export default {
   watch: {
     data: {
       handler() {
-        setTimeout(() => {
+        this.$nextTick(() => {
           this._calculateHeight()
-        }, 20)
+        })
       },
-      immediate: true,
+      // immediate: true,
     },
     scrollY(newY) {
       const listHeight = this.listHeight
@@ -111,7 +112,6 @@ export default {
       this.currentIndex = listHeight.length - 2
     },
     diff(newVal) {
-      const TITLE_HEIGHT = this.$refs.fixed.clientHeight
       const fixedTop =
         newVal > 0 && newVal < TITLE_HEIGHT ? newVal - TITLE_HEIGHT : 0
       // 这个判断可以使下一个title顶到上一个title时才运行后面的代码，不必每次都要操作dom
@@ -179,7 +179,6 @@ export default {
   overflow: hidden;
   background: $color-background;
   .list-group {
-    // padding: 10px 0;
     .list-group-title {
       height: 20px;
       line-height: 20px;
