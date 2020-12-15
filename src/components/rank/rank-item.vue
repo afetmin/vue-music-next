@@ -35,6 +35,7 @@ export default {
   border-bottom: 1px solid rgba($color: #333, $alpha: 0.1);
   .img-wrapper {
     position: relative;
+    flex: 0 0 100px;
     width: 100px;
     height: 100px;
     margin: 4px;
@@ -62,12 +63,14 @@ export default {
     font-size: $font-size-small;
     color: $color-text-g;
     margin-left: 12px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 100px;
-    width: 200px;
+    overflow: hidden;
     li {
+      line-height: 30px; // 显示英文下半部分
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
