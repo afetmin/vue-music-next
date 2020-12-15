@@ -86,6 +86,7 @@ export default {
       }
       .name-wrapper {
         margin: 5px 0 15px 0;
+        line-height: 15px;
         font-size: $font-size-small-x;
         @include text-ellipsis-multi(2);
       }

@@ -2,14 +2,14 @@
 
 .slide-down-enter,
 .slide-down-leave-to {
-  transform: translate3d(0, -100%, 0)
+    transform: translate3d(0, -100%, 0)
 }
 
 .slide-down-enter-to,
 .slide-down-leave,
 .slide-up-enter-to,
 .slide-up-leave {
-  transform: translate3d(0, 0, 0)
+    transform: translate3d(0, 0, 0)
 }
 
 .slide-down-enter-active,
@@ -31,38 +31,46 @@
 .title-move-enter-active,
 .title-move-leave-active,
 .hot-search-move-enter-active,
-.hot-search-move-leave-active {
-  transition: all .2s linear;
+.hot-search-move-leave-active,
+.list-enter-active,
+.list-leave-active {
+    transition: all .2s linear;
+}
+
+.list-enter,
+.list-leave-to {
+    height: 0;
 }
 
 .slide-up-enter,
 .slide-up-leave-to {
-  transform: translate3d(0, (138), 0)
+    transform: translate3d(0, 100%, 0)
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 .fade-enter-to,
 .fade-leave {
-  opacity: 1;
+    opacity: 1;
 }
 
 .slide-right-enter,
 .slide-right-leave-to {
-  transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
 }
+
 .slide-left-enter,
 .slide-left-leave-to {
-  transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
 }
 
 .popup-slide-up-enter,
 .popup-slide-up-leave-to {
-  transform: translate3d(0, 100%, 0);
-  opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
 }
 
 .popup-slide-up-enter-to,
@@ -75,29 +83,30 @@
 .title-move-leave,
 .hot-search-move-enter-to,
 .hot-search-move-leave {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
 }
 
 .fade-slide-right-enter,
 .fade-slide-right-leave-to {
-  transform: translate3d(-100%, 0, 0);
-  opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
 }
+
 .fade-slide-left-enter,
 .fade-slide-left-leave-to {
-  transform: translate3d(100%, 0, 0);
-  opacity: 0;
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
 }
 
 .title-move-enter,
 .title-move-leave-to {
-  transform: translate3d(0, (10), 0);
-  opacity: 0;
+    transform: translate3d(0, (10), 0);
+    opacity: 0;
 }
 
 .hot-search-move-enter,
 .hot-search-move-leave-to {
-  transform: translate3d(0, (30), 0);
-  opacity: 0;
+    transform: translate3d(0, (30), 0);
+    opacity: 0;
 }
