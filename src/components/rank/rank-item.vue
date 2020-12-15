@@ -44,7 +44,10 @@ export default {
       width: 100%;
       border-radius: 3px;
       text-align: center;
-      background: linear-gradient(rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.2));
+      background: linear-gradient(
+        rgba(255, 255, 255, 0.01),
+        rgba(0, 0, 0, 0.2)
+      );
       .text {
         font-size: $font-size-small-ss;
         color: $color-text-l;
@@ -63,6 +66,12 @@ export default {
     flex-direction: column;
     justify-content: space-around;
     height: 100px;
+    width: 200px;
+    li {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 </style>
