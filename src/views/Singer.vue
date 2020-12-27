@@ -13,6 +13,7 @@
 import ListView from '@/components/singer/listview'
 import { getSinger } from '@/api/singer'
 import Singer  from '@/utils/singer'
+import {mapActions} from 'vuex'
 
 const pinyin = require('pinyin')
 const HOT_NAME = '热门'
@@ -101,6 +102,7 @@ export default {
       })
       return hot.concat(ret)
     },
+    ...mapActions(['setSinger'])
   },
   components: {
     ListView,

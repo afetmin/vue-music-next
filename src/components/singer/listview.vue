@@ -136,6 +136,9 @@ export default {
   //   this.$refs.scroll.refresh()
   // },
   methods: {
+    selectItem(singer) {
+      this.$emit('select', singer)
+    },
     scroll(pos) {
       this.scrollY = pos.y
     },

@@ -6,3 +6,10 @@ export function getSinger(limit = 100) {
     method: 'get'
   })
 }
+
+export function getSingerDetail(id) {
+  return request({
+    url: `/artist/top/song?id=${id}`,
+    method: 'get'
+  })
+}

@@ -26,7 +26,11 @@
                 {{ item.first }}</span
               >
             </div>
-            <search-history :searches="searches" @clear="clearSearch"></search-history>
+            <search-history
+              :searches="searches"
+              @clear="clearSearch"
+              @deleteOne="deleteOne"
+            ></search-history>
           </div>
         </scroll>
       </div>
@@ -54,6 +58,11 @@ export default {
     this.getSearches()
   },
   methods: {
+    deleteOne(item) {
+      this.searches = this.searches.filter((key) => {
+        return key !== item
+      })
+    },
     clearSearch() {
       this.searches = []
     },
@@ -61,9 +70,9 @@ export default {
       this.searches.push(this.searchText)
       this.searches = [...new Set(this.searches)]
       setSession('search', JSON.stringify(this.searches))
-      getSuggest(this.searchText).then((res) => {
-        console.log(res)
-      })
+      // getSuggest(this.searchText).then((res) => {
+      //   console.log(res)
+      // })
     },
     getSearches() {
       if (getSession('search')) {

@@ -51,7 +51,7 @@ export default {
       this.$emit('select', item)
     },
     deleteOne(item) {
-      this.$emit('delete', item)
+      this.$emit('deleteOne', item)
     },
   },
 }

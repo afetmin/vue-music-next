@@ -33,7 +33,9 @@
 .hot-search-move-enter-active,
 .hot-search-move-leave-active,
 .list-enter-active,
-.list-leave-active {
+.list-leave-active,
+.fade-slide-up-enter-active,
+.fade-slide-up-leave-active {
     transition: all .2s linear;
 }
 
@@ -109,4 +111,16 @@
 .hot-search-move-leave-to {
     transform: translate3d(0, (30), 0);
     opacity: 0;
+}
+
+.fade-slide-up-enter,
+.fade-slide-up-leave-to {
+    transform: translate3d(0, 30%, 0);
+    opacity: 0;
+}
+
+.fade-slide-up-enter-to,
+.fade-slide-up-leave {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
 }
