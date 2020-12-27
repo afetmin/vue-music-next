@@ -6,7 +6,7 @@
           <i class="iconfont icon-back"></i>
         </div>
         <div class="search-input">
-          <input placeholder="搜索歌曲、歌手" v-model="searchText" />
+          <input placeholder="搜索歌曲、歌手" v-model.trim="searchText" />
           <i class="iconfont icon-close" v-show="searchText" @click="clear"></i>
         </div>
         <div class="search-btn" @click="search">
@@ -23,8 +23,10 @@
                 v-for="(item, index) in hots"
                 :key="index"
               >
-              {{item.first}}</span>
+                {{ item.first }}</span
+              >
             </div>
+            <search-history :searches="searches" @clear="clearSearch"></search-history>
           </div>
         </scroll>
       </div>
@@ -33,21 +35,41 @@
 </template>
 
 <script>
-import {getSearchHot} from '@/api/searchhot'
+import { getSuggest } from '@/api/suggest'
+import { getSearchHot } from '@/api/searchhot'
+import searchHistory from '../components/search/search-history.vue'
+import { setSession, getSession } from '@/utils/session'
 export default {
+  components: { searchHistory },
   data() {
     return {
       searchText: '',
-      hots: []
+      hots: [],
+      searches: [],
     }
   },
   async created() {
-    const {result} = await getSearchHot()
+    const { result } = await getSearchHot()
     this.hots = result.hots
+    this.getSearches()
   },
   methods: {
+    clearSearch() {
+      this.searches = []
+    },
     search() {
-      console.log('yes')
+      this.searches.push(this.searchText)
+      this.searches = [...new Set(this.searches)]
+      setSession('search', JSON.stringify(this.searches))
+      getSuggest(this.searchText).then((res) => {
+        console.log(res)
+      })
+    },
+    getSearches() {
+      if (getSession('search')) {
+        this.searches = JSON.parse(getSession('search'))
+      }
+      this.searches = []
     },
     clear() {
       this.searchText = ''
@@ -111,9 +133,9 @@ export default {
     overflow: hidden;
     height: 100%;
     .scroll {
+      margin: 10px;
       .search-hots {
-        margin: 10px;
-        .title  {
+        .title {
           padding: 10px 0;
           height: 20px;
           line-height: 20px;

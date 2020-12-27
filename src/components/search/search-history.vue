@@ -1,10 +1,21 @@
 <template>
-  <div class="search-list" v-show="searches.length">
+  <div class="search-list" v-if="searches.length">
+    <div class="title">
+      <span>搜索历史</span>
+      <span class="clear" @click.stop="clear()">
+        <i class="iconfont icon-icon27"></i>
+      </span>
+    </div>
     <transition-group name="list" tag="ul">
-      <li :key="item" class="search-item" @click="selectItem(item)" v-for="item in searches">
-        <span class="text">{{item}}</span>
+      <li
+        :key="item"
+        class="search-item"
+        @click="selectItem(item)"
+        v-for="item in searches"
+      >
+        <span class="text">{{ item }}</span>
         <span class="icon" @click.stop="deleteOne(item)">
-          <i class="icon-delete"></i>
+          <i class="iconfont icon-close"></i>
         </span>
       </li>
     </transition-group>
@@ -12,27 +23,54 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { Dialog } from 'vant'
+import { clearSession } from '@/utils/session'
 export default {
   props: {
     searches: {
-      type: Array
-    }
+      type: Array,
+      default: () => [],
+    },
   },
+  data() {
+    return {}
+  },
+  created() {},
   methods: {
-    selectItem (item) {
+    clear() {
+      Dialog.confirm({
+        title: '清空历史记录?',
+      })
+        .then(() => {
+          clearSession()
+          this.$emit('clear')
+        })
+        .catch(() => {})
+    },
+    selectItem(item) {
       this.$emit('select', item)
     },
-    deleteOne (item) {
+    deleteOne(item) {
       this.$emit('delete', item)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped lang="scss">
-@import "~common/scss/variable";
-@import "~common/scss/mixin";
 .search-list {
+  .title {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    height: 20px;
+    line-height: 20px;
+    font-size: $font-size-medium;
+    color: $color-text-g;
+    .clear {
+      @include extend-click();
+    }
+  }
   .search-item {
     display: flex;
     align-items: center;
@@ -45,8 +83,8 @@ export default {
     }
     .icon {
       @include extend-click();
-      .icon-delete {
-        font-size: $font-size-small;
+      .icon-close {
+        font-size: $font-size-medium-x;
         color: $color-text;
       }
     }
