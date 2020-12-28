@@ -24,7 +24,6 @@ export default {
   computed: {},
   methods: {
     selectItem(data) {
-      console.log(data);
       this.$emit('selectItem',data)
     },
   },

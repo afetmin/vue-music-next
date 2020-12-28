@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { getSuggest } from '@/api/suggest'
+// import { getSuggest } from '@/api/suggest'
 import { getSearchHot } from '@/api/searchhot'
 import searchHistory from '../components/search/search-history.vue'
 import { setSession, getSession } from '@/utils/session'

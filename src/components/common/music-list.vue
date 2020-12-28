@@ -22,6 +22,9 @@
         <song-list :songs="songs" @select="selectItem"></song-list>
       </div>
     </scroll>
+    <div v-show="!songs.length" class="loading-wrapper">
+      <van-loading color="#d44439"></van-loading>
+    </div>
   </div>
 </template>
 
@@ -168,8 +171,13 @@ export default {
     bottom: 0;
     width: 100%;
     background: $color-background;
-    .song-list-wrapper {
-    }
+  }
+  .loading-wrapper {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%,);
   }
 }
 </style>
