@@ -5,15 +5,17 @@
       @select="selectSinger"
       ref="list"
     ></list-view>
-    <router-view></router-view>
+    <transition name="fade-slide-left">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
 import ListView from '@/components/singer/listview'
 import { getSinger } from '@/api/singer'
-import Singer  from '@/utils/singer'
-import {mapActions} from 'vuex'
+import Singer from '@/utils/singer'
+import { mapActions } from 'vuex'
 
 const pinyin = require('pinyin')
 const HOT_NAME = '热门'
@@ -102,7 +104,7 @@ export default {
       })
       return hot.concat(ret)
     },
-    ...mapActions(['setSinger'])
+    ...mapActions(['setSinger']),
   },
   components: {
     ListView,

@@ -1,7 +1,5 @@
 <template>
-  <transition name="fade-slide-up">
-    <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
-  </transition>
+  <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
 </template>
 
 <script type="text/ecmascript-6">
