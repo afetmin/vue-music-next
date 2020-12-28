@@ -79,7 +79,9 @@ export default {
     back() {
       this.$router.back()
     },
-    selectItem(item, index) {},
+    selectItem(item, index) {
+      console.log(item, index)
+    },
     random() {},
   },
   watch: {
@@ -133,6 +135,9 @@ export default {
     color: $color-text-l;
     .back {
       margin: 0 10px;
+    }
+    .title {
+      @include no-wrap;
     }
   }
   .bg-image {

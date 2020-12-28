@@ -1,4 +1,5 @@
 const music = {
-  singer: {}
+  singer: {},
+  playlist: {}
 }
 export default music

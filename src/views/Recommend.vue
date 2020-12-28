@@ -3,9 +3,12 @@
     <scroll ref="scroll" class="scroll" :data="recommendPlaylist">
       <div>
         <banner></banner>
-        <recommend-list :data="recommendPlaylist"></recommend-list>
+        <recommend-list :data="recommendPlaylist" @selectList="selectList"></recommend-list>
       </div>
     </scroll>
+    <transition name="fade-slide-left">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -13,18 +16,25 @@
 import banner from '../components/recommend/banner.vue'
 import RecommendList from '../components/recommend/recommend-list.vue'
 import { getPlaylist } from '@/api/playlist'
-
+import {mapActions} from 'vuex'
 export default {
   components: { banner, RecommendList },
   data() {
     return {
-      recommendPlaylist: []
+      recommendPlaylist: [],
     }
   },
   async created() {
     const { result } = await getPlaylist()
     this.recommendPlaylist = result
   },
+  methods: {
+    selectList(item) {
+      this.$router.push(`/recommend/${item.id}`)
+      this.setPlaylist(item)
+    },
+    ...mapActions(['setPlaylist'])
+  }
 }
 </script>
 <style lang='scss' scoped>

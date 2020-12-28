@@ -1,5 +1,5 @@
 <template>
-  <div class="rank-item">
+  <div class="rank-item" @click="selectItem(data)">
     <div class="img-wrapper">
       <img v-lazy="data.coverImgUrl" />
       <div class="mask">
@@ -22,6 +22,12 @@ export default {
     },
   },
   computed: {},
+  methods: {
+    selectItem(data) {
+      console.log(data);
+      this.$emit('selectItem',data)
+    },
+  },
 }
 </script>
 <style lang='scss' scoped>

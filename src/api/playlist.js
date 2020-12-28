@@ -7,3 +7,10 @@ export function getPlaylist(limit = 30) {
     method: 'get'
   })
 }
+
+export function getPlaylistDetail(id) {
+  return request({
+    url: `/playlist/detail?id=${id}`,
+    method: 'get'
+  })
+}

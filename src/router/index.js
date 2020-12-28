@@ -10,7 +10,13 @@ const routes = [
   },
   {
     path: '/recommend',
-    component: () => import('@/views/Recommend.vue')
+    component: () => import('@/views/Recommend.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/components/recommend/playlist-detail.vue')
+      }
+    ]
   },
   {
     path: '/singer',
@@ -24,7 +30,13 @@ const routes = [
   },
   {
     path: '/rank',
-    component: () => import('@/views/Rank.vue')
+    component: () => import('@/views/Rank.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('@/components/recommend/playlist-detail.vue')
+      }
+    ]
   },
   {
     path: '/user',
