@@ -95,7 +95,6 @@ export default {
       } else {
         blur = Math.min(20, percent * 20)
       }
-
       this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
       this.$refs.filter.style[backdrop] = `blur(${blur}px)`
       if (newVal < this.minTransalteY) {
@@ -104,7 +103,7 @@ export default {
         this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`
         // this.$refs.playBtn.style.display = 'none'
       } else {
-        this.$refs.bgImage.style.paddingTop = '70%'
+        this.$refs.bgImage.style.paddingTop = '75%'
         this.$refs.bgImage.style.height = 0
         // this.$refs.playBtn.style.display = ''
       }
@@ -117,7 +116,7 @@ export default {
 <style lang='scss' scoped>
 .music-list {
   position: fixed;
-  z-index: 200;
+  z-index: 100;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -125,7 +124,7 @@ export default {
   .header {
     position: fixed;
     top: 0;
-    z-index: 201;
+    z-index: 101;
     display: flex;
     height: 40px;
     align-items: center;
@@ -135,12 +134,6 @@ export default {
     .back {
       margin: 0 10px;
     }
-    .title {
-      text-align: center;
-    }
-    .block {
-      background: transparent;
-    }
   }
   .bg-image {
     position: relative;
@@ -149,7 +142,6 @@ export default {
     padding-top: 75%;
     transform-origin: top;
     background-size: cover;
-    background-position: 0 30%;
     .filter {
       position: absolute;
       top: 0;
@@ -159,22 +151,11 @@ export default {
       background: black;
       opacity: 0.2;
     }
-    .text {
-      position: absolute;
-      width: 80%;
-      height: 40px;
-      bottom: 40px;
-      left: 20px;
-      color: #fff;
-      .list-title {
-        position: absolute;
-        bottom: 0;
-        font-size: $font-size-large-s;
-        line-height: 18px;
-        font-weight: bold;
-        letter-spacing: 1px;
-      }
-    }
+  }
+  .bg-layer {
+    position: relative;
+    height: 100%;
+    background: $color-background;
   }
   .list {
     position: fixed;
@@ -183,33 +164,6 @@ export default {
     width: 100%;
     background: $color-background;
     .song-list-wrapper {
-      padding: 40px 0 20px 0;
-      border-radius: 10px;
-      position: relative;
-      top: -20px;
-      .sequence-play {
-        position: absolute;
-        // left: 8;
-        top: 0px;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 40px;
-        padding-left: 16px;
-        border-bottom: 1px solid rgb(228, 228, 228);
-        .iconfont {
-          font-size: 18px;
-          color: $color-text;
-          padding-right: 14px;
-        }
-        .text {
-          font-size: $font-size-medium-x;
-        }
-        .count {
-          font-size: $font-size-medium;
-          color: $color-text-g;
-        }
-      }
     }
   }
 }

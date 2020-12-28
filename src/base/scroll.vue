@@ -99,7 +99,7 @@ export default {
         startX: this.startX,
         // 取消某个方向的回弹动画
         bounce: {
-          top: false,
+          // top: false,
         },
       })
 
