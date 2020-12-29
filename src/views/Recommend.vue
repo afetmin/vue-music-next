@@ -31,9 +31,9 @@ export default {
   methods: {
     selectList(item) {
       this.$router.push(`/recommend/${item.id}`)
-      this.setPlaylist(item)
+      this.setDisc(item)
     },
-    ...mapActions(['setPlaylist'])
+    ...mapActions(['setDisc'])
   }
 }
 </script>

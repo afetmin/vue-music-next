@@ -17,12 +17,12 @@ export default {
     MusicList,
   },
   computed: {
-    ...mapGetters(['playlist']),
+    ...mapGetters(['disc']),
     title() {
-      return this.playlist.name
+      return this.disc.name
     },
     bgImage() {
-      return this.playlist.picUrl || this.playlist.coverImgUrl
+      return this.disc.picUrl || this.disc.coverImgUrl
     },
   },
   created() {
@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     _getDetail() {
-      getPlaylistDetail(this.playlist.id).then((res) => {
+      // fix: 刷新的时候没有传入disc导致页面加载不出
+      getPlaylistDetail(this.disc.id || this.$route.params.id).then((res) => {
         this.songs = this._normalizeSongs(res.playlist.tracks)
       })
     },

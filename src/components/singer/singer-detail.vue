@@ -34,7 +34,7 @@ export default {
         this.$router.push('/singer')
         return
       }
-      getSingerDetail(this.singer.id).then((res) => {
+      getSingerDetail(this.singer.id || this.$route.params.id).then((res) => {
         if (res.code === ERR_OK) {
           this.songs = this._normalizeSongs(res.songs)
         }

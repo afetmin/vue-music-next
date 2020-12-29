@@ -33,14 +33,14 @@ export default {
   methods: {
     selectItem(item) {
       this.$router.push(`/rank/${item.id}`)
-      this.setPlaylist(item)
+      this.setDisc(item)
     },
     _normalizeToplist(list) {
       return list.filter((item) => {
         return item.tracks && item.tracks.length > 0
       })
     },
-    ...mapActions(['setPlaylist']),
+    ...mapActions(['setDisc']),
   },
 }
 </script>

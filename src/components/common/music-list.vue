@@ -4,9 +4,20 @@
       <div class="back" @click="back">
         <i class="iconfont icon-left"></i>
       </div>
-      <h1 class="title">{{ title }}</h1>
+      <span class="title">{{ title }}</span>
     </div>
     <div class="bg-image" :style="bgStyle" ref="bgImage">
+      <div class="play-wrapper">
+        <div
+          class="play"
+          ref="playBtn"
+          v-show="songs.length > 0"
+          @click="random"
+        >
+          <i class="iconfont icon-play"></i>
+          <span class="text">随机播放全部</span>
+        </div>
+      </div>
       <div class="filter" ref="filter"></div>
     </div>
     <div class="bg-layer" ref="layer"></div>
@@ -31,6 +42,7 @@
 <script>
 import SongList from '@/components/common/song-list'
 import { prefixStyle } from '@/utils/dom'
+import { mapActions } from 'vuex'
 const RESERVED_HEIGHT = 40
 const transform = prefixStyle('transform')
 const backdrop = prefixStyle('backdrop-filter')
@@ -41,7 +53,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '歌手',
+      default: '歌曲',
     },
     bgImage: {
       type: String,
@@ -83,9 +95,17 @@ export default {
       this.$router.back()
     },
     selectItem(item, index) {
-      console.log(item, index)
+      this.selectPlay({
+        list: this.songs,
+        index,
+      })
     },
-    random() {},
+    random() {
+      this.randomPlay({
+        list: this.songs,
+      })
+    },
+    ...mapActions(['selectPlay', 'randomPlay']),
   },
   watch: {
     scrollY(newVal) {
@@ -106,11 +126,11 @@ export default {
         zIndex = 10
         this.$refs.bgImage.style.paddingTop = 0
         this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`
-        // this.$refs.playBtn.style.display = 'none'
+        this.$refs.playBtn.style.display = 'none'
       } else {
         this.$refs.bgImage.style.paddingTop = '75%'
         this.$refs.bgImage.style.height = 0
-        // this.$refs.playBtn.style.display = ''
+        this.$refs.playBtn.style.display = ''
       }
       this.$refs.bgImage.style[transform] = `scale(${scale})`
       this.$refs.bgImage.style.zIndex = zIndex
@@ -130,17 +150,16 @@ export default {
     position: fixed;
     top: 0;
     z-index: 101;
+    width: 100%;
     display: flex;
     height: 40px;
     align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
     color: $color-text-l;
     .back {
       margin: 0 10px;
     }
     .title {
-      @include no-wrap;
+      @include no-wrap();
     }
   }
   .bg-image {
@@ -150,6 +169,36 @@ export default {
     padding-top: 75%;
     transform-origin: top;
     background-size: cover;
+    .play-wrapper {
+      position: absolute;
+      bottom: 20px;
+      z-index: 50;
+      width: 100%;
+      .play {
+        box-sizing: border-box;
+        width: 135px;
+        padding: 7px 0;
+        margin: 0 auto;
+        text-align: center;
+        border: 1px solid $color-theme;
+        color: $color-theme;
+        border-radius: 100px;
+        font-size: 0;
+        .icon-play {
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 6px;
+          font-size: $font-size-medium-x;
+        }
+        .text {
+          display: inline-block;
+          letter-spacing: 1px;
+          font-weight: 500;
+          vertical-align: middle;
+          font-size: $font-size-medium;
+        }
+      }
+    }
     .filter {
       position: absolute;
       top: 0;
@@ -177,7 +226,7 @@ export default {
     text-align: center;
     width: 100%;
     top: 50%;
-    transform: translateY(-50%,);
+    transform: translateY(-50%);
   }
 }
 </style>
