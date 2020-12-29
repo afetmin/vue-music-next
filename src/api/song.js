@@ -6,3 +6,16 @@ export function getSong(id) {
     method: 'get'
   })
 }
+
+export function getSongUrl(id) {
+  return request({
+    url: `/song/url?id=${id}`,
+    method: 'get'
+  })
+}
+export function getLyric(id) {
+  return request({
+    url: `/lyric?id=${id}`,
+    method: 'get'
+  })
+}

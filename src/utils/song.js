@@ -24,6 +24,6 @@ export function createSong(music) {
     name: music.name,
     // aliaName: filiterAliaName(music.alia),
     album: music.al.name,
-    image: music.al.picUrl
+    image: music.al.picUrl,
   })
 }

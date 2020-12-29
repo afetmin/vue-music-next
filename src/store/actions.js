@@ -1,6 +1,6 @@
 import * as types from './mutation-types'
 import { playMode } from '@/utils/config'
-import { shuffle } from '@/utils/util'
+import { shuffle } from '@/utils/common'
 import { saveSearch, clearSearch, deleteSearch, savePlay, saveFavorite, deleteFavorite } from '@/utils/cache'
 
 function findIndex(list, song) {
@@ -15,6 +15,12 @@ const actions = {
   },
   setDisc({ commit }, disc) {
     return commit(types.SET_DISC, disc)
+  },
+  setFullScreen({ commit }, flag) {
+    return commit(types.SET_FULL_SCREEN, flag)
+  },
+  setPlayingState({ commit },flag) {
+    return commit(types.SET_PLAYING_STATE, flag)
   },
   selectPlay({ commit, state }, { list, index }) {
     commit(types.SET_SEQUENCE_LIST, list)

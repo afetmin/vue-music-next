@@ -14,6 +14,8 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('src'),
+        'cpnts': resolve('src/components'),
+        'common': resolve('src/components/common')
       }
     }
   },
