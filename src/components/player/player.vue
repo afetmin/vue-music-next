@@ -417,7 +417,10 @@ export default {
         this.songUrl = res.data[0].url
         this.$refs.audio.src = this.songUrl
         this.setPlayingState(true)
-        this.play()
+        // 修复频繁修改audio的src造成的加载错误。
+        setTimeout(() => {
+          this.play()
+        },20)
       })
     },
     _getLyric() {
