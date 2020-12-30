@@ -19,11 +19,21 @@ const actions = {
   setFullScreen({ commit }, flag) {
     return commit(types.SET_FULL_SCREEN, flag)
   },
-  setPlayingState({ commit },flag) {
+  setPlayingState({ commit }, flag) {
     return commit(types.SET_PLAYING_STATE, flag)
+  },
+  setCurrentIndex({ commit }, index) {
+    return commit(types.SET_CURRENT_INDEX, index)
+  },
+  setPlayMode({ commit }, mode) {
+    return commit(types.SET_PLAY_MODE, mode)
+  },
+  setPlaylist({ commit }, list) {
+    return commit(types.SET_PLAYLIST, list)
   },
   selectPlay({ commit, state }, { list, index }) {
     commit(types.SET_SEQUENCE_LIST, list)
+    // 随机播放时点击列表找到点击song的位置然后改变当前播放song
     if (state.mode === playMode.random) {
       let randomList = shuffle(list)
       commit(types.SET_PLAYLIST, randomList)

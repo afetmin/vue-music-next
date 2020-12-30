@@ -32,3 +32,14 @@ export function debounce(func, delay) {
     }, delay)
   }
 }
+
+
+
+export function pad(num, n = 2) {
+  let len = num.toString().length
+  while (len < n) {
+    num = '0' + num
+    len++
+  }
+  return num
+}
