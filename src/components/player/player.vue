@@ -88,8 +88,8 @@
             <div class="icon i-left" @click="changeMode">
               <i class="iconfont" :class="iconMode"></i>
             </div>
-            <div class="icon i-left" @click="prev" :class="disableCls">
-              <i class="iconfont icon-previous"></i>
+            <div class="icon i-left" :class="disableCls">
+              <i class="iconfont icon-previous" @click="prev"></i>
             </div>
             <div
               @click="togglePlaying"
@@ -98,8 +98,8 @@
             >
               <i class="iconfont" :class="playIcon"></i>
             </div>
-            <div class="icon i-right" @click="next" :class="disableCls">
-              <i class="iconfont icon-next1"></i>
+            <div class="icon i-right" :class="disableCls">
+              <i class="iconfont icon-next1" @click="next"></i>
             </div>
             <div class="icon i-right">
               <i class="iconfont icon-like2"></i>
@@ -314,6 +314,7 @@ export default {
       if (!this.songReady) {
         return
       }
+      // 解决歌单里只有一首音乐时切换音乐不触发currentSong
       if (this.playlist.length === 1) {
         this.loop()
         return
@@ -420,7 +421,7 @@ export default {
         // 修复频繁修改audio的src造成的加载错误。
         setTimeout(() => {
           this.play()
-        },20)
+        }, 20)
       })
     },
     _getLyric() {
@@ -539,7 +540,7 @@ export default {
     top: 0;
     bottom: 0;
     z-index: 150;
-    background: $color-text-g;
+    background: $color-text;
     .background {
       position: absolute;
       left: -50%;
@@ -651,7 +652,7 @@ export default {
               width: 70%;
               height: 70%;
               border-radius: 50%;
-              border: 40px solid rgba(0, 0, 0, 0.9);
+              border: 40px solid rgba(0, 0, 0, 0.85);
             }
           }
         }

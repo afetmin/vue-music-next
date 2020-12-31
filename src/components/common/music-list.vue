@@ -43,10 +43,14 @@
 import SongList from '@/components/common/song-list'
 import { prefixStyle } from '@/utils/dom'
 import { mapActions } from 'vuex'
+import { playlistMixin } from '@/utils/mixin'
+
 const RESERVED_HEIGHT = 40
 const transform = prefixStyle('transform')
 const backdrop = prefixStyle('backdrop-filter')
+
 export default {
+  mixins: [playlistMixin],
   components: {
     SongList,
   },

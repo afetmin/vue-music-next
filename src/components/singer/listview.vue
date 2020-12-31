@@ -157,6 +157,9 @@ export default {
       const anchorIndex = parseInt(this.touch.anchorIndex) + delta
       this._scrollTo(anchorIndex)
     },
+    refresh() {
+      this.$refs.scroll.refresh()
+    },
     _scrollTo(index) {
       this.$refs.scroll.scrollToElement(this.$refs.listGroup[index], 0)
     },

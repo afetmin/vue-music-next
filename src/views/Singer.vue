@@ -16,12 +16,14 @@ import ListView from '@/components/singer/listview'
 import { getSinger } from '@/api/singer'
 import Singer from '@/utils/singer'
 import { mapActions } from 'vuex'
+import { playlistMixin } from '@/utils/mixin'
 
 const pinyin = require('pinyin')
 const HOT_NAME = '热门'
 const HOT_SINGERS = 10
 
 export default {
+  mixins: [playlistMixin],
   data() {
     return {
       singers: [],
