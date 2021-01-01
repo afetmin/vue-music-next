@@ -1,96 +1,134 @@
 <template>
-  <transition name="fade-slide-left">
-    <div class="search">
-      <div class="search-header">
-        <div class="back" @click="back">
-          <i class="iconfont icon-back"></i>
-        </div>
-        <div class="search-input">
-          <input placeholder="搜索歌曲、歌手" v-model.trim="searchText" />
-          <i class="iconfont icon-close" v-show="searchText" @click="clear"></i>
-        </div>
-        <div class="search-btn" @click="search">
-          <i class="iconfont icon-search"></i>
-        </div>
+  <transition name="search">
+    <div class="search" ref="searchWrapper">
+      <div class="search-box-wrapper">
+        <i class="iconfont icon-left" @click="back"></i>
+        <search-box @query="onQueryChange" ref="searchBox"></search-box>
       </div>
-      <div class="search-content-wrapper">
-        <scroll class="scroll" ref="scroll">
-          <div>
-            <div class="search-hots">
-              <h2 class="title">热门搜索</h2>
-              <span
-                class="search-hots-item"
-                v-for="(item, index) in hots"
-                :key="index"
-              >
-                {{ item.first }}</span
-              >
-            </div>
-            <search-history
-              :searches="searches"
-              @clear="clearSearch"
-              @deleteOne="deleteOne"
-            ></search-history>
+      <scroll
+        class="search-scroll-wrapper"
+        ref="scroll"
+        :pullup="pullup"
+        @scrollToEnd="searchMore"
+        :beforeScroll="beforeScroll"
+        @beforeScroll="listenScroll"
+      >
+        <div ref="search">
+          <div class="search-hots" v-show="!query">
+            <p class="title">热门搜索</p>
+            <span
+              class="search-hots-item"
+              v-for="item in hots"
+              :key="item.id"
+              @click="addQuery(item.first)"
+            >
+              {{ item.first }}
+            </span>
           </div>
-        </scroll>
-      </div>
+          <div class="shortcut-wrapper" v-show="!query">
+            <div class="search-history" v-show="searchHistory.length > 0">
+              <h1 class="title">
+                <span class="text">搜索历史</span>
+                <span class="clear" @click="showConfirm">
+                  <i class="iconfont icon-icon27"></i>
+                </span>
+              </h1>
+              <search-list
+                @select="addQuery"
+                @delete="deleteSearchHistory"
+                :searches="searchHistory"
+              ></search-list>
+            </div>
+          </div>
+          <div class="search-result">
+            <suggest
+              @select="saveSearch"
+              @refresh="refresh"
+              :query="query"
+              ref="suggest"
+            ></suggest>
+          </div>
+        </div>
+      </scroll>
+      <transition name="search">
+        <router-view></router-view>
+      </transition>
     </div>
   </transition>
 </template>
 
 <script>
-// import { getSuggest } from '@/api/suggest'
-import { getSearchHot } from '@/api/searchhot'
-import searchHistory from '../components/search/search-history.vue'
-import { setSession, getSession } from '@/utils/session'
+import { Dialog } from 'vant'
+import Suggest from 'cpnts//search/suggest'
+import { searchMixin, playlistMixin } from '@/utils/mixin'
+import { getSearchHot } from '@/api/search'
+
 export default {
-  components: { searchHistory },
+  mixins: [searchMixin, playlistMixin],
   data() {
     return {
-      searchText: '',
+      pullup: true,
       hots: [],
-      searches: [],
+      beforeScroll: true,
     }
   },
-  async created() {
-    const { result } = await getSearchHot()
-    this.hots = result.hots
-    this.getSearches()
+  created() {
+    this._getSearchHot()
   },
   methods: {
-    deleteOne(item) {
-      this.searches = this.searches.filter((key) => {
-        return key !== item
-      })
-    },
-    clearSearch() {
-      this.searches = []
-    },
-    search() {
-      this.searches.push(this.searchText)
-      this.searches = [...new Set(this.searches)]
-      setSession('search', JSON.stringify(this.searches))
-      // getSuggest(this.searchText).then((res) => {
-      //   console.log(res)
-      // })
-    },
-    getSearches() {
-      if (getSession('search')) {
-        this.searches = JSON.parse(getSession('search'))
-      }
-      this.searches = []
-    },
-    clear() {
-      this.searchText = ''
-    },
     back() {
       this.$router.back()
-      this.clear()
+      this.$refs.searchBox.clear()
     },
+    showConfirm() {
+      Dialog.confirm({
+        title: '清空',
+        message: '清空历史记录?',
+      })
+        .then(() => {
+          this.clearSearchHistory()
+        })
+        .catch(() => {})
+    },
+    _getSearchHot() {
+      getSearchHot().then((res) => {
+        this.hots = res.result.hots
+      })
+    },
+    onQueryChange(query) {
+      this.query = query
+    },
+    addQuery(query) {
+      this.$refs.searchBox.setQuery(query)
+    },
+    saveSearch() {
+      this.saveSearchHistory(this.query)
+    },
+    searchMore() {
+      this.$refs.suggest.searchMore()
+    },
+    // 滑动时手机键盘收起
+    listenScroll() {
+      this.$refs.searchBox.blur()
+    },
+    refresh() {
+      setTimeout(() => {
+        this.$refs.scroll.refresh()
+      }, 20)
+    },
+    handlePlaylist(playlist) {
+      const bottom = playlist.length > 0 ? '60px' : ''
+      this.$refs.searchWrapper.style.bottom = bottom
+      this.refresh()
+    },
+  },
+  components: {
+    Suggest,
   },
 }
 </script>
-<style lang='scss' scoped>
+
+<style lang="scss" scoped>
 .search {
   position: fixed;
   z-index: 100;
@@ -98,71 +136,100 @@ export default {
   top: 0;
   bottom: 0;
   background: $color-background;
-  .search-header {
+  .search-box-wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 42px;
+    justify-content: flex-start;
+    height: 50px;
     background: $color-theme;
-    color: $color-theme-l;
-    box-sizing: border-box;
-    padding: 0 12px;
-    font-size: 24px;
-    .back {
-      @include extend-click;
-    }
-    .search-input {
-      box-sizing: initial;
-      position: relative;
-      input {
-        font-size: $font-size-medium;
-        padding: 5px 15px;
-        border: none;
-        outline: none;
-        border-radius: 13px;
-        color: $color-theme-d;
-        transition: all 0.2s linear;
-        width: 150px;
-        &:focus {
-          width: 250px;
-        }
-      }
-      .icon-close {
-        position: absolute;
-        right: 0;
-        top: 5px;
-        color: $color-text;
-      }
-    }
-    .search-btn {
-      @include extend-click;
+    .iconfont {
+      padding: 3px 10px;
+      font-size: 25px;
+      color: #fff;
     }
   }
-  .search-content-wrapper {
-    overflow: hidden;
+  .search-scroll-wrapper {
     height: 100%;
-    .scroll {
-      margin: 10px;
-      .search-hots {
+    overflow: hidden;
+    .search-hots {
+      margin: 0 20px;
+      .title {
+        padding: 15px 5px 0 5px;
+        height: 30px;
+        line-height: 30px;
+        font-size: $font-size-small-x;
+        color: $color-text-g;
+      }
+      span {
+        display: inline-block;
+        padding: 3px 5px;
+        margin: 4px 4px;
+        border: 0.8px solid $color-text-ggg;
+        border-radius: 5px;
+        line-height: 20px;
+        color: $color-text;
+        font-size: $font-size-medium;
+      }
+    }
+    .shortcut-wrapper {
+      position: relative;
+      // top: 178px
+      // bottom: 0
+      // width: 90%
+      margin: 0 auto;
+      .shortcut {
+        height: 100%;
+        overflow: hidden;
+        .hot-key {
+          margin: 0 20px 20px 20px;
+          .title {
+            margin-bottom: 20px;
+            font-size: $font-size-medium;
+            color: $color-text;
+          }
+          .item {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 20px 10px 0;
+            border-radius: 6px;
+            background: $color-highlight-background;
+            font-size: $font-size-medium;
+            color: $color-text;
+          }
+        }
+      }
+      .search-history {
+        position: relative;
+        margin: 10px 25px;
         .title {
-          padding: 10px 0;
-          height: 20px;
-          line-height: 20px;
+          display: flex;
+          align-items: center;
+          height: 30px;
           font-size: $font-size-small-x;
           color: $color-text-g;
-        }
-        .search-hots-item {
-          display: inline-block;
-          padding: 3px 5px;
-          margin: 4px;
-          border: 0.8px solid $color-text-ggg;
-          border-radius: 4px;
-          line-height: 20px;
-          color: $color-text;
-          font-size: $font-size-medium;
+          .text {
+            // font-size: 13px;
+            flex: 1;
+          }
+          .clear {
+            @include extend-click();
+            .icon-clear {
+              font-size: $font-size-medium;
+              color: $color-text;
+            }
+          }
         }
       }
     }
+    .search-result {
+      position: relative;
+      width: 100%;
+      top: 10px;
+      bottom: 0;
+    }
   }
+}
+.router-view {
+  z-index: 1000;
 }
 </style>

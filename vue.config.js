@@ -7,6 +7,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   outputDir: 'music',
+  publicPath:'./',
   lintOnSave: isProd,
   productionSourceMap: true,
   configureWebpack: {

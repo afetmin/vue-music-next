@@ -125,6 +125,17 @@
     opacity: 1;
 }
 
+.search-enter-active,
+.search-leave-active {
+    transition: all 0.3s;
+}
+
+.search-enter,
+.search-leave-to {
+    transform: translate3d(50%, 0, 0);
+    opacity: 0;
+}
+
 @keyframes rotate {
     0% {
         transform: rotate(0);

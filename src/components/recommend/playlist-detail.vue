@@ -1,5 +1,7 @@
 <template>
-  <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
+  <transition name="search">
+    <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
+  </transition>
 </template>
 
 <script>

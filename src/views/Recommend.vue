@@ -9,7 +9,7 @@
         ></recommend-list>
       </div>
     </scroll>
-    <transition name="fade-slide-left">
+    <transition name="search">
       <router-view></router-view>
     </transition>
   </div>

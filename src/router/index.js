@@ -44,7 +44,17 @@ const routes = [
   },
   {
     path: '/search',
-    component: () => import('@/views/Search.vue')
+    component: () => import('@/views/Search.vue'),
+    children: [
+      {
+        path: 'singer/:id',
+        component: () => import('@/components/singer/singer-detail.vue')
+      },
+      {
+        path: 'playlist/:id',
+        component: () => import('@/components/recommend/playlist-detail.vue')
+      }
+    ]
   },
 
 ]
