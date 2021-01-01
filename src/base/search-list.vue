@@ -37,7 +37,7 @@ export default {
     align-items: center;
     height: 35px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: $font-size-medium-x;
     &.list-enter-active, &.list-leave-active {
       transition: all 0.1s;
     }

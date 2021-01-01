@@ -157,7 +157,7 @@ export default {
         padding: 15px 5px 0 5px;
         height: 30px;
         line-height: 30px;
-        font-size: $font-size-small-x;
+        font-size: $font-size-medium;
         color: $color-text-g;
       }
       span {
@@ -173,9 +173,6 @@ export default {
     }
     .shortcut-wrapper {
       position: relative;
-      // top: 178px
-      // bottom: 0
-      // width: 90%
       margin: 0 auto;
       .shortcut {
         height: 100%;
@@ -205,7 +202,7 @@ export default {
           display: flex;
           align-items: center;
           height: 30px;
-          font-size: $font-size-small-x;
+          font-size: $font-size-medium;
           color: $color-text-g;
           .text {
             // font-size: 13px;

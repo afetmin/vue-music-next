@@ -123,10 +123,11 @@
           </progress-circle>
         </div>
         <div class="musiclist">
-          <i class="iconfont icon-musiclist"></i>
+          <i class="iconfont icon-musiclist" @click.stop="showPlaylist"></i>
         </div>
       </div>
     </transition>
+    <playlist @stopMusic="stopMusic" ref="playlist"></playlist>
     <audio
       ref="audio"
       @canplay="ready"
@@ -142,6 +143,7 @@ import { mapGetters, mapActions } from 'vuex'
 import animations from 'create-keyframe-animation'
 import { prefixStyle } from '@/utils/dom'
 import { getSongUrl } from '@/api/song'
+import Playlist from 'cpnts/playlist/playlist'
 import Lyric from 'lyric-parser'
 import progressBar from '../../base/progress-bar.vue'
 import { playMode } from '@/utils/config'
@@ -151,7 +153,7 @@ const transform = prefixStyle('transform')
 const transitionDuration = prefixStyle('transitionDuration')
 
 export default {
-  components: { progressBar },
+  components: { progressBar, Playlist },
   data() {
     return {
       songUrl: '',
@@ -235,6 +237,14 @@ export default {
     this.touch = {}
   },
   methods: {
+    stopMusic() {
+      // 删除最后一首的时候暂停音乐
+      this.$refs.audio.pause()
+      console.log('删除最后一首的时候暂停音乐')
+    },
+    showPlaylist() {
+      this.$refs.playlist.show()
+    },
     changeMode() {
       const mode = (this.mode + 1) % 3
       this.setPlayMode(mode)
