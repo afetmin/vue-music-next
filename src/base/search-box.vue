@@ -70,7 +70,7 @@ export default {
   }
   .iconfont {
     position: absolute;
-    right: 10px;
+    right: 15px;
     font-size: $font-size-large-x;
     color: rgba(255, 255, 255, 0.8);
     border: none;

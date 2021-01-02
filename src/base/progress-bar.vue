@@ -21,6 +21,7 @@ const progressBtnWidth = 16
 const transform = prefixStyle('transform')
 
 export default {
+  name: 'progress-bar',
   data() {
     return {
       newPercent: 0,

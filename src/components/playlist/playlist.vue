@@ -39,33 +39,22 @@
             </li>
           </transition-group>
         </scroll>
-        <div class="list-operate">
-          <div @click="addSong" class="add">
-            <i class="iconfont icon-add"></i>
-            <span class="text">添加歌曲到队列</span>
-          </div>
-        </div>
         <div @click="hide" class="list-close">
           <span>关闭</span>
         </div>
       </div>
-      <add-song ref="addSong"></add-song>
     </div>
   </transition>
 </template>
 
 <script>
 import { Dialog } from 'vant'
-import AddSong from 'cpnts/add-song/add-song'
 import { mapActions } from 'vuex'
 import { playMode } from '@/utils/config'
 import { shuffle } from '@/utils/common'
 import { playerMixin } from '@/utils/mixin'
 export default {
   mixins: [playerMixin],
-  components: {
-    AddSong,
-  },
   data() {
     return {
       showFlag: false,
@@ -91,9 +80,6 @@ export default {
     },
   },
   methods: {
-    addSong() {
-      this.$refs.addSong.show()
-    },
     showConfirm() {
       Dialog.confirm({
         title: '清空',
@@ -273,26 +259,6 @@ export default {
           @include extend-click();
           font-size: $font-size-large;
           color: $color-theme;
-        }
-      }
-    }
-    .list-operate {
-      width: 140px;
-      margin: 20px auto 10px auto;
-      font-size: $font-size-medium;
-      .add {
-        display: flex;
-        align-items: center;
-        padding: 8px 16px;
-        border: 1px solid $color-text;
-        border-radius: 100px;
-        color: $color-text;
-        .iconfont {
-          margin-right: 5px;
-          font-size: $font-size-small;
-        }
-        .text {
-          font-size: $font-size-small;
         }
       }
     }

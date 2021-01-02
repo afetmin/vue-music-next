@@ -14,6 +14,7 @@
 
 <script type="text/ecmascript-6">
 export default {
+  name: 'switches',
   props: {
     switches: {
       type: Array,
@@ -38,7 +39,7 @@ export default {
   align-items: center;
   width: 240px;
   margin: 0 auto;
-  border: 1px solid $color-highlight-background;
+  border: 1px solid $color-theme-l;
   border-radius: 5px;
   .switch-item {
     flex: 1;
@@ -47,7 +48,7 @@ export default {
     font-size: $font-size-medium;
     color: $color-text;
     &.active {
-      background: $color-highlight-background;
+      background: $color-theme-l;
       color: $color-text;
     }
   }

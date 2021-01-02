@@ -135,7 +135,16 @@
     transform: translate3d(50%, 0, 0);
     opacity: 0;
 }
+.searchR-enter-active,
+.searchR-leave-active {
+    transition: all 0.3s;
+}
 
+.searchR-enter,
+.searchR-leave-to {
+    transform: translate3d(-50%, 0, 0);
+    opacity: 0;
+}
 @keyframes rotate {
     0% {
         transform: rotate(0);

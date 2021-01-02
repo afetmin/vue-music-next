@@ -102,7 +102,11 @@
               <i class="iconfont icon-next1" @click="next"></i>
             </div>
             <div class="icon i-right">
-              <i class="iconfont icon-like2"></i>
+              <i
+                class="iconfont"
+                @click="toggleFavorite(currentSong)"
+                :class="getFavoriteIcon(currentSong)"
+              ></i>
             </div>
           </div>
         </div>
@@ -142,17 +146,19 @@
 import { mapGetters, mapActions } from 'vuex'
 import animations from 'create-keyframe-animation'
 import { prefixStyle } from '@/utils/dom'
-import { getSongUrl } from '@/api/song'
+import { getSongUrl, getLyric } from '@/api/song'
 import Playlist from 'cpnts/playlist/playlist'
 import Lyric from 'lyric-parser'
 import progressBar from '../../base/progress-bar.vue'
 import { playMode } from '@/utils/config'
 import { shuffle, pad } from '@/utils/common'
+import { playerMixin } from '@/utils/mixin'
 
 const transform = prefixStyle('transform')
 const transitionDuration = prefixStyle('transitionDuration')
 
 export default {
+  mixins: [playerMixin],
   components: { progressBar, Playlist },
   data() {
     return {
@@ -300,6 +306,7 @@ export default {
     ready() {
       this.songReady = true
       this.duration = this.$refs.audio.duration
+      this.savePlayHistory(this.currentSong)
     },
     prev() {
       if (!this.songReady) {
@@ -435,22 +442,45 @@ export default {
       })
     },
     _getLyric() {
-      this.currentSong
-        .getLyric()
-        .then((lyric) => {
-          if (this.currentSong.lyric !== lyric) {
-            return
-          }
-          this.currentLyric = new Lyric(lyric, this.handleLyric)
-          if (this.playing) {
-            this.currentLyric.play()
-          }
-        })
-        .catch(() => {
-          this.currentLyric = null
-          this.playingLyric = ''
-          this.currentLineNum = 0
-        })
+      // 当从收藏列表进入时，song没有getLyric方法，需要直接调用接口获取
+      if (typeof this.currentSong.getLyric === 'function') {
+        this.currentSong
+          .getLyric()
+          .then((lyric) => {
+            if (this.currentSong.lyric !== lyric) {
+              return
+            }
+            this.currentLyric = new Lyric(lyric, this.handleLyric)
+            if (this.playing) {
+              this.currentLyric.play()
+            }
+          })
+          .catch(() => {
+            this.currentLyric = null
+            this.playingLyric = ''
+            this.currentLineNum = 0
+          })
+      } else {
+        getLyric(this.currentSong.id)
+          .then((res) => {
+            if (res.lrc) {
+              let lyric = res.lrc.lyric
+              this.currentLyric = new Lyric(lyric, this.handleLyric)
+              if (this.playing) {
+                this.currentLyric.play()
+              }
+            } else {
+              this.currentLyric = null
+              this.playingLyric = ''
+              this.currentLineNum = 0
+            }
+          })
+          .catch(() => {
+            this.currentLyric = null
+            this.playingLyric = ''
+            this.currentLineNum = 0
+          })
+      }
     },
     handleLyric({ lineNum, txt }) {
       this.currentLineNum = lineNum
@@ -537,6 +567,7 @@ export default {
       'setCurrentIndex',
       'setPlayMode',
       'setPlaylist',
+      'savePlayHistory',
     ]),
   },
 }
@@ -851,7 +882,7 @@ export default {
       overflow: hidden;
       .name {
         margin-bottom: 2px;
-        line-height: 14px;
+        line-height: $font-size-large;
         @include no-wrap();
         font-size: $font-size-medium;
         color: $color-text;
