@@ -1,5 +1,5 @@
 
-// const remBase = 37.5
+// const remBase = 16
 // let htmlFontSize
 
 // (function () {

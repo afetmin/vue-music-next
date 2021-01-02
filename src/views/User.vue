@@ -74,7 +74,7 @@ export default {
     },
     noResultDesc() {
       if (this.currentIndex === 0) {
-        return '去寻找属于你自己最爱的MUSIC吧~'
+        return '找一首喜欢的歌吧~'
       } else {
         return '你还没有听过歌呀~'
       }

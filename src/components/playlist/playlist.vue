@@ -195,7 +195,7 @@ export default {
     left: 0;
     bottom: 0;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: $color-background;
     .list-header {
       position: relative;

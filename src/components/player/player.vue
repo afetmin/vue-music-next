@@ -20,12 +20,12 @@
           <div class="needle" v-show="currentShow === 'cd'">
             <img
               class="play-bar-support"
-              src="@/assets/imgs/play-bar-support.png"
+              src="~@/assets/imgs/play-bar-support.png"
             />
             <img
               :class="{ playing }"
               class="play-bar"
-              src="@/assets/imgs/play-bar.png"
+              src="~@/assets/imgs/play-bar.png"
             />
           </div>
         </div>
@@ -134,7 +134,8 @@
     <playlist @stopMusic="stopMusic" ref="playlist"></playlist>
     <audio
       ref="audio"
-      @canplay="ready"
+      @canplay="canplay"
+      @play="ready"
       @error="error"
       @timeupdate="updateTime"
       @ended="end"
@@ -226,6 +227,7 @@ export default {
           this.currentLineNum = 0
         }
         clearTimeout(this.timer)
+        // 手机进入后台再切到前台后播放
         this.timer = setTimeout(() => {
           this.play()
           this._getLyric()
@@ -245,7 +247,7 @@ export default {
   methods: {
     stopMusic() {
       // 删除最后一首的时候暂停音乐
-      this.$refs.audio.pause()
+      this.pause()
       console.log('删除最后一首的时候暂停音乐')
     },
     showPlaylist() {
@@ -303,9 +305,12 @@ export default {
       this.songReady = true
     },
     // 歌曲加載完成后回調
+    canplay() {
+      this.duration = this.$refs.audio.duration
+    },
+    // 歌曲准备播放
     ready() {
       this.songReady = true
-      this.duration = this.$refs.audio.duration
       this.savePlayHistory(this.currentSong)
     },
     prev() {
