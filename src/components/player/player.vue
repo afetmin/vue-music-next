@@ -48,6 +48,7 @@
           <scroll
             class="middle-r"
             ref="lyricList"
+            v-if="fullScreen"
             :data="currentLyric && currentLyric.lines"
           >
             <div class="lyric-wrapper">
@@ -172,6 +173,7 @@ export default {
       currentLineNum: 0,
       currentShow: 'cd',
       playingLyric: '',
+      percent: 0,
     }
   },
   computed: {
@@ -206,9 +208,6 @@ export default {
     disableCls() {
       return this.songReady ? '' : 'disable'
     },
-    percent() {
-      return this.currentTime / this.duration
-    },
   },
   watch: {
     currentSong: {
@@ -226,12 +225,6 @@ export default {
           this.playingLyric = ''
           this.currentLineNum = 0
         }
-        clearTimeout(this.timer)
-        // 手机进入后台再切到前台后播放
-        this.timer = setTimeout(() => {
-          this.play()
-          this._getLyric()
-        }, 1000)
       },
       immediate: true,
     },
@@ -239,6 +232,19 @@ export default {
       this.$nextTick(() => {
         newVal ? this.play() : this.pause()
       })
+    },
+    currentTime() {
+      this.percent = this.currentTime / this.duration
+    },
+    songUrl(newUrl) {
+      this.$refs.audio.src = newUrl
+      this.currentTime = 0
+      this.duration = this.$refs.audio.duration
+      clearTimeout(this.timer)
+      // 手机进入后台再切到前台后播放
+      this.timer = setTimeout(() => {
+        this._getLyric()
+      }, 1000)
     },
   },
   created() {
@@ -439,7 +445,6 @@ export default {
       getSongUrl(id).then((res) => {
         this.songUrl = res.data[0].url
         this.$refs.audio.src = this.songUrl
-        this.setPlayingState(true)
         // 修复频繁修改audio的src造成的加载错误。
         setTimeout(() => {
           this.play()

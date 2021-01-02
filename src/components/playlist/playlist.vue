@@ -154,16 +154,6 @@ export default {
     },
     ...mapActions(['deleteSong', 'deleteSongList']),
   },
-  watch: {
-    currentSong(newSong, oldSong) {
-      if (!this.showFlag || newSong.id === oldSong.id) {
-        return
-      }
-      setTimeout(() => {
-        this.scrollToCurrent(newSong)
-      }, 20)
-    },
-  },
 }
 </script>
 
