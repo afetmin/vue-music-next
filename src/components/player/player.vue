@@ -48,7 +48,6 @@
           <scroll
             class="middle-r"
             ref="lyricList"
-            v-if="fullScreen"
             :data="currentLyric && currentLyric.lines"
           >
             <div class="lyric-wrapper">
@@ -379,7 +378,9 @@ export default {
       this.setFullScreen(false)
     },
     open() {
-      this.setFullScreen(true)
+      this.setFullScreen(true).then(() => {
+        this.$refs.lyricList.refresh()
+      })
     },
     enter(el, done) {
       const { x, y, scale } = this._getPosAndScale()
