@@ -20,12 +20,12 @@
           <div class="needle" v-show="currentShow === 'cd'">
             <img
               class="play-bar-support"
-              src="~@/assets/imgs/play-bar-support.png"
+              src="@/assets/imgs/play-bar-support.png"
             />
             <img
               :class="{ playing }"
               class="play-bar"
-              src="~@/assets/imgs/play-bar.png"
+              src="@/assets/imgs/play-bar.png"
             />
           </div>
         </div>
@@ -444,7 +444,6 @@ export default {
     _getSong(id) {
       getSongUrl(id).then((res) => {
         this.songUrl = res.data[0].url
-        this.$refs.audio.src = this.songUrl
         // 修复频繁修改audio的src造成的加载错误。
         setTimeout(() => {
           this.play()

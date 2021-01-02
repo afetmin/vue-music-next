@@ -27,7 +27,7 @@ export default {}
   .me {
     order: 0;
     .iconfont {
-      font-size: 24px;
+      font-size: 26px;
     }
   }
   .title {
