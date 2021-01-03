@@ -34,19 +34,18 @@
 ## 效果预览
 部分gif比较大，可能需要一些时间
 <figure class="third">
-    <img src="static/ho-min.gif">
-    <img src="static/user-min.gif">
-    <img src="static/search-min.gif">
+    <img src="static/ho-min.gif" width="200">
+    <img src="static/user-min.gif" width="200">
+    <img src="static/search-min.gif" width="200">
 </figure>
 <figure class="third">
-    <img src="static/player-min.gif">
-    <img src="static/userplayer-min.gif">
-    <img src="static/singplayer-min.gif">
+    <img src="static/player-min.gif" width="200">
+    <img src="static/userplayer-min.gif" width="200">
+    <img src="static/singplayer-min.gif" width="200">
 </figure>
 <figure class="half">
-<img src="static/playlist-min.gif">
-    <img src="static/searchplayer-min.gif">
-    <img src="static/userplayer-min.gif">
+    <img src="static/searchplayer-min.gif" width="200">
+    <img src="static/userplayer-min.gif" width="200">
 </figure>
 
 ### 感谢
