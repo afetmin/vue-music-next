@@ -6,7 +6,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/recommend'
+    redirect: '/recommend',
+    component: () => import('@/views/Recommend.vue'),
   },
   {
     path: '/recommend',
@@ -60,7 +61,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
