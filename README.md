@@ -23,11 +23,11 @@
  - [ ] 播放列表
 
 ### 技术栈
- - ***Vue*** Vue-cli3 Create
- - ***Vant*** swipe/Dialog/loading/lazyload, 框架用着舒服
-- ***postcss-pxtorem*** 不必每次都要写px2rem了
-- ***better-scroll*** 遇到很多坑，但解决后很开心
-- ***lyric-parser*** 歌词解析
+ - ***Vue***  :Vue-cli3 Create
+ - ***Vant***  :swipe/Dialog/loading/lazyload, 框架用着舒服
+- ***postcss-pxtorem***  :不必每次都要写px2rem了
+- ***better-scroll***  :遇到很多坑，但解决后很开心
+- ***lyric-parser***  :歌词解析
 - ***ES6***
 - ***Sass***
 
