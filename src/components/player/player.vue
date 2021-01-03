@@ -154,7 +154,6 @@ import progressBar from '../../base/progress-bar.vue'
 import { playMode } from '@/utils/config'
 import { shuffle, pad } from '@/utils/common'
 import { playerMixin } from '@/utils/mixin'
-
 const transform = prefixStyle('transform')
 const transitionDuration = prefixStyle('transitionDuration')
 
