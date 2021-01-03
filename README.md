@@ -33,9 +33,15 @@
 
 ## 效果预览
 部分gif比较大，可能需要一些时间
-<figure class="third"><img src="static/ho-min.gif" width="230"> <img src="static/user-min.gif" width="230"> <img src="static/search-min.gif" width="230"></figure>
-<figure class="third"><img src="static/player-min.gif" width="230"> <img src="static/userplayer-min.gif" width="230"> <img src="static/singplayer-min.gif" width="230"></figure>
-<figure class="half"><img src="static/searchplayer-min.gif" width="230"> <img src="static/userplayer-min.gif" width="230"></figure>
+<figure class="third">
+<img src="static/ho-min.gif" width="230"> <img src="static/user-min.gif" width="230"> <img src="static/search-min.gif" width="230">
+</figure>
+<figure class="third">
+<img src="static/player-min.gif" width="230"> <img src="static/userplayer-min.gif" width="230"> <img src="static/singplayer-min.gif" width="230">
+</figure>
+<figure class="half">
+<img src="static/searchplayer-min.gif" width="230"> <img src="static/userplayer-min.gif" width="230">
+</figure>
 
 ### 感谢
 - [Binaryify](https://github.com/Binaryify) 的 [NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)
