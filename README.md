@@ -5,7 +5,7 @@
 
 或者扫码查看:
 
-<img src="static/qrcode.jpg" width="300">
+<img src="static/qrcode.jpg" >
 
 - 推荐使用手机浏览(小米自带浏览器有兼容问题)，电脑调试模式下如果无法滑动，可以刷新一下页面。
 
@@ -33,15 +33,9 @@
 
 ## 效果预览
 部分gif比较大，可能需要一些时间
-<figure class="third">
-<img src="static/ho-min.gif" width="300"> <img src="static/user-min.gif" width="300"> <img src="static/search-min.gif" width="300">
-</figure>
-<figure class="third">
-<img src="static/player-min.gif" width="300"> <img src="static/userplayer-min.gif" width="300"> <img src="static/singplayer-min.gif" width="300">
-</figure>
-<figure class="half">
-<img src="static/searchplayer-min.gif" width="300"> <img src="static/userplayer-min.gif" width="300">
-</figure>
+<figure class="third"><img src="static/ho-min.gif" > <img src="static/user-min.gif" > <img src="static/search-min.gif" ></figure>
+<figure class="third"><img src="static/player-min.gif" > <img src="static/userplayer-min.gif" > <img src="static/singplayer-min.gif" ></figure>
+<figure class="half"><img src="static/searchplayer-min.gif" > <img src="static/userplayer-min.gif" ></figure>
 
 ### 感谢
 - [Binaryify](https://github.com/Binaryify) 的 [NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)
