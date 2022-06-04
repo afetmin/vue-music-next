@@ -1,13 +1,8 @@
 # vue-music-next
 基于 ```Vue2 + Vue-Cli3 + vuex + vue-router + axios ``` 全家桶练习的云音乐
 
-项目演示地址 :point_right: ：[vue-music-next](http://47.103.222.160/)
+项目演示地址 服务器已到期，可自行clone后启动查看效果
 
-或者扫码查看:
-
-<img src="static/qrcode.jpg" width="300">
-
-- 推荐使用手机浏览(小米自带浏览器有兼容问题)，电脑调试模式下如果无法滑动，可以刷新一下页面。
 
 ### 后端接口
 [NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi)
